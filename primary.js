@@ -2,6 +2,8 @@ var $picked = $("#picked"); // Just to preview picked colors
 var canvas = $('#canvas_picker')[0];
 var context = canvas.getContext('2d');
 
+const colorArray = []; 
+
 
 $("#file_upload").change(function (e) {
     var F = this.files[0];
@@ -31,16 +33,26 @@ $('#canvas_picker').click(function (event) {
     var hex = rgbToHex(R, G, B);
     $('#rgb input').val(rgb);
     $('#hex input').val('#' + hex);
-    $picked.append("<span style='background:#" + hex + "'>#" + hex + "</span>");
+    $picked.append("<span style='background:#" + hex + "'>#" + hex + " & " + rgb + "</span>");
+
+    var colorObject = { rgbVal: rgb, hexValue: hex };
+    colorArray.push(colorObject);
 });
 
-function rgbToHex(R, G, B) {
-    return toHex(R) + toHex(G) + toHex(B);
+function objectReveal() {
+    var i;
+    var arrayText = "";
+    for (i = 0; i < colorArray.length; i++) {
+        arrayText = arrayText + "#" + colorArray[i][0] + "&";
+    }
+    document.getElementById("target-id").innerHTML = arrayText;
 }
 
-function toHex(n) {
-    n = parseInt(n, 10);
-    if (isNaN(n)) return "00";
-    n = Math.max(0, Math.min(n, 255));
-    return "0123456789ABCDEF".charAt((n - n % 16) / 16) + "0123456789ABCDEF".charAt(n % 16);
+function rgbToHex(R, G, B) {
+    return partToHex(R) + partToHex(G) + partToHex(B);
+}
+
+function partToHex(n) {
+    var hex = n.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
 }
