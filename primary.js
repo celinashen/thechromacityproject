@@ -43,7 +43,7 @@ function objectReveal() {
     var i;
     var arrayText = "";
     for (i = 0; i < colorArray.length; i++) {
-        arrayText = arrayText + "#" + colorArray[i][0] + "&";
+        arrayText = arrayText + "#" + colorArray[i].hexValue + "&";
     }
     document.getElementById("target-id").innerHTML = arrayText;
 }
