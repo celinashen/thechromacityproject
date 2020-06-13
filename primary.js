@@ -42,8 +42,11 @@ $('#canvas_picker').click(function (event) {
 function objectReveal() {
     var i;
     var arrayText = "";
-    for (i = 0; i < colorArray.length; i++) {
-        arrayText = arrayText + "#" + colorArray[i].hexValue + "&";
+
+    arrayText = arrayText + "#" + colorArray[0].hexValue
+
+    for (i = 1; i < colorArray.length; i++) {
+        arrayText = arrayText +" &amp; " + "#" + colorArray[i].hexValue;
     }
     document.getElementById("target-id").innerHTML = arrayText;
 }
