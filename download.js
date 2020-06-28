@@ -13,5 +13,13 @@ function downloadSVG(filename) {
     element.remove();
 }
 
+function download() {
+  var save = document.getElementById("example").value;
+  var blob = new Blob([save], {
+    type: "text/plain;charset=utf-8"
+  });
+  saveAs(blob, "yournewfile.txt");
+}
+
 
 
