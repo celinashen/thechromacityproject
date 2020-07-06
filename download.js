@@ -1,7 +1,8 @@
 
 
+const colorArray = require("./primary");
 
-function downloadSVG(filename) {
+/**function downloadSVG(filename) {
     getElementsByTagName('svg')[0].setAttribute('xmlns', 'http://www.w3.org/2000/svg')
     var filename = "palette.svg"
     const svg = document.getElementById('drawing').innerHTML;
@@ -11,15 +12,44 @@ function downloadSVG(filename) {
     element.href = window.URL.createObjectURL(blob);
     element.click();
     element.remove();
+
+    for (i = 0; i < colorArray.length; i++){
+      var shape = palette.createElementNS(svgns, "circle");
+      shape.setAttributeNS(colorArray[0]);
+    }
+
+    //palette.svg();
+
 }
 
-function download() {
-  var save = document.getElementById("example").value;
-  var blob = new Blob([save], {
-    type: "text/plain;charset=utf-8"
-  });
-  saveAs(blob, "yournewfile.txt");
+**/
+
+function createPalette(){
+
+  // create the svg element
+  const svg1 = document. createElementNS("http://www.w3.org/2000/svg", "svg");
+
+  svg1.setAttribute("width", "100");
+  svg1.setAttribute("height", "100");
+
+  for (i = 0; i < colorArray.length; i++){
+    var shape = palette.createElementNS(svgns, "circle");
+    shape.setAttributeNS(colorArray[i]);
+  }
+
+  return svg1;
 }
+
+
+function download(){
+  
+  var dl = document.createElement("a");
+  document.body.appendChild(dl); // This line makes it work in Firefox.
+  dl.setAttribute("href", dataURL);
+  dl.setAttribute("download", "palette.svg");
+  dl.click();
+}
+
 
 
 
